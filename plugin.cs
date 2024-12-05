@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Exiled.API.Features;
 using MEC;
 
@@ -47,9 +48,32 @@ namespace SCP372Plugin
 
         private void OnRoundStarted()
         {
-            if (visibilityManager.Scp372Player != null)
+            if (Config.Debug)
+                Log.Info("Round started. Checking for SCP-372 assignment...");
+
+            // Wylosowanie, czy SCP-372 ma się pojawić
+            if (new Random().Next(0, 100) < Config.SpawnChance)
             {
-                visibilityManager.EnsureInvisible(visibilityManager.Scp372Player);
+                var potentialPlayers = Player.List;
+                var randomPlayer = potentialPlayers.ElementAtOrDefault(new Random().Next(0, potentialPlayers.Count()));
+
+                if (randomPlayer != null)
+                {
+                    AssignScp372(randomPlayer);
+
+                    if (Config.Debug)
+                        Log.Info($"Randomly assigned {randomPlayer.Nickname} as SCP-372.");
+                }
+                else
+                {
+                    if (Config.Debug)
+                        Log.Warn("No players available to assign as SCP-372.");
+                }
+            }
+            else
+            {
+                if (Config.Debug)
+                    Log.Info("No SCP-372 spawned this round due to chance.");
             }
         }
 

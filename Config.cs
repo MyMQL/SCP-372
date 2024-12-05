@@ -11,6 +11,7 @@ namespace SCP372Plugin
         public RoleTypeId StartingRole { get; set; } = RoleTypeId.ClassD; // Class that SCP-372 uses to spawn, ig?
         public int StartingHealth { get; set; } = 100; // starting hp
         public string BroadcastMessage { get; set; } = "<b><color=red>You are SCP-372!</color></b>"; // broadcast info
+        public int SpawnChance { get; set; } = 30; // spawn chance 30 = 30%, dont set it higher than 100 or less than 0 please
     }
 }
 
