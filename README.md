@@ -4,7 +4,7 @@
 
 ## 🌍 **Description ENG**
 
-**SCP-372 Plugin** is an advanced server plugin for SCP: Secret Laboratory that introduces **SCP-372** – an invisible and exceptionally fast entity. SCP-372 becomes temporarily visible after shooting or interacting with objects.
+**SCP-372** is an advanced server plugin for SCP: Secret Laboratory that introduces **SCP-372** – an invisible and exceptionally fast entity. SCP-372 becomes temporarily visible after shooting or interacting with objects.
 
 ### ✨ **Features**
 - 📌 **Invisibility**: Automatically applies the `Invisible` effect to SCP-372.
@@ -50,7 +50,7 @@ Found a bug or have a suggestion? Open an issue in this repository and provide d
 
 ## 🛠️ **Opis (PL)**
 
-**SCP-372 Plugin** to zaawansowany plugin na serwery SCP: Secret Laboratory, który dodaje **SCP-372** – niewidzialną i wyjątkowo szybką jednostkę. Działa TYLKO na exiledzie w wersji 8.14.0.
+**SCP-372** to zaawansowany plugin na serwery SCP: Secret Laboratory, który dodaje **SCP-372** – niewidzialną i wyjątkowo szybką jednostkę. Działa TYLKO na exiledzie w wersji 8.14.0.
 
 ### ✨ **Funkcje**
 - 📌 **Niewidzialność**: Automatyczne ustawienie efektu `Invisible` dla SCP-372.
