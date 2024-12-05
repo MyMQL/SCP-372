@@ -92,6 +92,9 @@ namespace SCP372Plugin
             player.Health = Config.StartingHealth;
             visibilityManager.AssignScp372Player(player);
 
+            // Do not touch it, it makes 372 invisible at start
+            visibilityManager.EnsureInvisible(player);
+
             player.Broadcast(7, Config.BroadcastMessage);
 
             if (Config.Debug)
