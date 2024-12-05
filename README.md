@@ -34,6 +34,7 @@ scp372plugin:
 2. Place the file into the `Plugins` folder on your server.
 3. Configure the plugin in the `config.yml` file you can use CTRL+F to easily find our part of that config.
 4. Start your server and enjoy the ~~bugs~~ gameplay!
+5. (Optional) Add scp372.spawn or .* permission to your role to make scp372 work for you.
 
 ---
 
@@ -80,6 +81,7 @@ scp372plugin:
 2. Umieść plik w folderze `Plugins` na serwerze.
 3. Skonfiguruj plugin w pliku `config.yml`.
 4. Uruchom serwer.
+5. (Opcjonalne) Możesz dodać uprawnienie scp372.spawn do swojej roli, aby umożliwić respawn SCP'ka poleceniem w RA.
 
 ---
 
@@ -90,3 +92,4 @@ Projekt jest dostępny na licencji **MIT**, co oznacza, że możesz go swobodnie
 
 ## 🧩 **Zgłaszanie błędów**
 Znalazłeś błąd lub masz sugestię? Otwórz zgłoszenie w tym repozytorium i podaj szczegółowe informacje o problemie lub swoim pomyśle. Ale BŁAGAM, bez postów typu "nie działa napraw".
+
