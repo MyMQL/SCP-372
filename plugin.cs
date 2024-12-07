@@ -11,6 +11,7 @@ namespace SCP372Plugin
         public override string Name => "SCP372MyMQL";
         public override string Author => "MyMQL";
         public override Version RequiredExiledVersion => new Version(8, 14, 0);
+        public override Version Version => new Version(1, 1, 0);
 
         public static Plugin Instance { get; private set; }
         private VisibilityManager visibilityManager;
@@ -21,9 +22,10 @@ namespace SCP372Plugin
             visibilityManager = new VisibilityManager();
             Exiled.Events.Handlers.Player.InteractingDoor += OnInteractingDoor;
             Exiled.Events.Handlers.Player.Shooting += OnShooting;
+            Exiled.Events.Handlers.Player.Escaping += OnEscaping; // new handler
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
 
-            // Check if SC-P372 currently have invisibilty
+            // monitor if 372 should have invisibility but it doesnt, if it should then do it
             Timing.RunCoroutine(MonitorVisibilityState());
 
             if (Config.Debug)
@@ -36,6 +38,7 @@ namespace SCP372Plugin
         {
             Exiled.Events.Handlers.Player.InteractingDoor -= OnInteractingDoor;
             Exiled.Events.Handlers.Player.Shooting -= OnShooting;
+            Exiled.Events.Handlers.Player.Escaping -= OnEscaping; // remove handler
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             visibilityManager = null;
             Instance = null;
@@ -51,7 +54,7 @@ namespace SCP372Plugin
             if (Config.Debug)
                 Log.Info("Round started. Checking for SCP-372 assignment...");
 
-            // Wylosowanie, czy SCP-372 ma się pojawić
+            // random spawn chance system
             if (new Random().Next(0, 100) < Config.SpawnChance)
             {
                 var potentialPlayers = Player.List;
@@ -92,7 +95,7 @@ namespace SCP372Plugin
             player.Health = Config.StartingHealth;
             visibilityManager.AssignScp372Player(player);
 
-            // Do not touch it, it makes 372 invisible at start
+            // make sure that 372 is invisibile at the start, no need to wait x time
             visibilityManager.EnsureInvisible(player);
 
             player.Broadcast(7, Config.BroadcastMessage);
@@ -114,6 +117,20 @@ namespace SCP372Plugin
             if (ev.Player == visibilityManager.Scp372Player)
             {
                 visibilityManager.TemporarilyMakeVisible(ev.Player, Config.VisibilityDuration);
+            }
+        }
+
+        private void OnEscaping(Exiled.Events.EventArgs.Player.EscapingEventArgs ev)
+        {
+            if (ev.Player == visibilityManager.Scp372Player)
+            {
+                // disable 372 system after escape
+                visibilityManager.HandlePlayerEscape(ev.Player);
+
+                if (Config.Debug)
+                {
+                    Log.Info($"Player {ev.Player.Nickname} escaped as SCP-372. System disabled.");
+                }
             }
         }
     }
