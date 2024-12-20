@@ -1,4 +1,4 @@
-### 🔥 **SCP-372 Plugin for SCP: Secret Laboratory** 🔥
+# 🔥 **SCP-372 Plugin for SCP: Secret Laboratory** 🔥
 
 ![Exiled](https://img.shields.io/badge/Exiled-8.14.0-blue.svg) ![Language](https://img.shields.io/badge/Language-C%23-brightgreen.svg) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
