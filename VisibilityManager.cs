@@ -52,7 +52,7 @@ namespace SCP372Plugin
 
         public void EnsureInvisible(Player player)
         {
-            if (isTemporarilyVisible || isOnSurface) return; // Do not make visible if he is on surface
+            if (isTemporarilyVisible || isOnSurface) return; // Make him visible on surface, and invisible in every other area
 
             var effectsController = player.ReferenceHub.playerEffectsController;
 
