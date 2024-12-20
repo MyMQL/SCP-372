@@ -3,6 +3,7 @@ using Exiled.API.Features;
 using MEC;
 using CustomPlayerEffects;
 using PlayerRoles;
+using SCP372Plugin.API;
 
 namespace SCP372Plugin
 {
@@ -17,6 +18,8 @@ namespace SCP372Plugin
         {
             Scp372Player = player;
             EnsureInvisible(player); // make sure that the player is invisible at start, reffers to plugin,.cs
+
+            SCP372Event.OnSCP372Assigned(new SCP372AssignedEventArgs(player)); // Trigger event
 
             // monitor surface
             Timing.RunCoroutine(MonitorSurface());
@@ -126,6 +129,8 @@ namespace SCP372Plugin
                     Log.Warn("CassieMessageOnEscape in config is empty or null!");
                 }
             }
+
+            SCP372Event.OnSCP372Escaped(new SCP372EscapedEventArgs(player)); // Trigger event
 
             if (Plugin.Instance.Config.Debug)
                 Log.Info($"SCP-372 player {player.Nickname} escaped and is no longer SCP-372.");

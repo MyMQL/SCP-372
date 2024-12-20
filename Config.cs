@@ -8,28 +8,31 @@ namespace SCP372Plugin
         public bool IsEnabled { get; set; } = true;
         public bool Debug { get; set; } = false;
 
-        // chance for 372 to spawn 50 means 50%
-        public int SpawnChance { get; set; } = 50;
+        // Duration of visibility after an action (e.g., shooting, opening doors)
+        public float VisibilityDuration { get; set; } = 4.0f;
 
-        // class that 372 spawns into, it would be much
-        public RoleTypeId StartingRole { get; set; } = RoleTypeId.ClassD;
-
-        // starting heatlh
+        // Starting health for SCP-372
         public float StartingHealth { get; set; } = 100f;
 
-        // Visibility time in seconds
-        public float VisibilityDuration { get; set; } = 2f;
+        // Role assigned to SCP-372
+        public RoleTypeId StartingRole { get; set; } = RoleTypeId.ClassD;
 
-        // broadcast after YOU being scp372
-        public string BroadcastMessage { get; set; } = "You have been selected as SCP-372. Stay hidden!";
+        // Broadcast message for SCP-372
+        public string BroadcastMessage { get; set; } = "<b><color=red>You are SCP-372!</color></b>";
 
-        // Should the cassie announce that 372 escaped?
+        // Percent chance for SCP-372 to spawn
+        public int SpawnChance { get; set; } = 30;
+
+        // Should the cassie announce that 372 spawned?
+        public bool EnableCassieOnSpawn { get; set; } = true;
+
+        // Message announced by CASSIE when SCP-372 spawns
+        public string CassieMessageOnSpawn { get; set; } = "SCP 3 7 2 has breached containment. Exercise caution.";
+
+        // Should the cassie announce SCP-372 escaping?
         public bool EnableCassieOnEscape { get; set; } = true;
 
-        // WORKS ONLY IF enablecassie = true, what message should the cassie announce?
+        // Message announced by CASSIE when SCP-372 escapes
         public string CassieMessageOnEscape { get; set; } = "SCP 3 7 2 has escaped.";
     }
 }
-
-
-

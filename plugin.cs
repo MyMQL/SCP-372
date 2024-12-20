@@ -100,6 +100,14 @@ namespace SCP372Plugin
 
             player.Broadcast(7, Config.BroadcastMessage);
 
+
+            if (Config.EnableCassieOnSpawn && !string.IsNullOrEmpty(Config.CassieMessageOnSpawn))
+            {
+                Cassie.Message(Config.CassieMessageOnSpawn);
+                if (Config.Debug)
+                    Log.Info($"CASSIE broadcasted: {Config.CassieMessageOnSpawn}");
+            }
+
             if (Config.Debug)
                 Log.Info($"Player {player.Nickname} has been assigned as SCP-372.");
         }
