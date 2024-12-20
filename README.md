@@ -1,4 +1,4 @@
-# 🔥 **SCP-372 Plugin for SCP: Secret Laboratory** 🔥
+### 🔥 **SCP-372 Plugin for SCP: Secret Laboratory** 🔥
 
 ![Exiled](https://img.shields.io/badge/Exiled-8.14.0-blue.svg) ![Language](https://img.shields.io/badge/Language-C%23-brightgreen.svg) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
@@ -13,6 +13,8 @@
 - ⚙️ **Full Configuration**: Customize the starting class, health, visibility duration, and more.
 - 🪄 **Dynamic Correction**: Automatically corrects invisibility effect if removed unexpectedly.
 - 🔔 **Escape Detection**: Broadcast a configurable CASSIE announcement when SCP-372 escapes.
+- 📢 **Spawn Announcement**: Broadcast a configurable CASSIE announcement when SCP-372 spawns.
+- 🔧 **API Support**: Expose events to integrate SCP-372's behavior with other plugins or systems.
 - 🛠️ **Debugging**: Additional console logs (when enabled in the config).
 
 ### 🚀 **Requirements**
@@ -33,6 +35,8 @@ scp372plugin:
   spawn_chance: 30 # Percent chance for SCP-372 to spawn
   enable_cassie_on_escape: true # Enable or disable CASSIE escape announcements
   cassie_message_on_escape: "SCP 3 7 2 has successfully escaped" # CASSIE announcement for SCP-372 escape
+  enable_cassie_on_spawn: true # Enable or disable CASSIE spawn announcements
+  cassie_message_on_spawn: "SCP 3 7 2 has breached containment" # CASSIE announcement for SCP-372 spawn
 ```
 
 ### 🛠️ **Installation**
@@ -65,6 +69,8 @@ Found a bug or have a suggestion? Open an issue in this repository and provide d
 - ⚙️ **Pełna konfiguracja**: Możliwość ustawienia klasy startowej, zdrowia, czasu widzialności i więcej.
 - 🪄 **Dynamiczna korekcja**: System automatycznie koryguje efekt niewidzialności, jeśli zostanie usunięty.
 - 🔔 **Wykrywanie ucieczki**: Nadawanie ogłoszenia przez CASSIE o ucieczce SCP-372.
+- 📢 **Ogłoszenie pojawienia się**: Nadawanie ogłoszenia przez CASSIE o pojawieniu się SCP-372.
+- 🔧 **Obsługa API**: Eksponowanie zdarzeń do integracji zachowania SCP-372 z innymi pluginami.
 - 🛠️ **Debugowanie**: Dodatkowe logi w konsoli (jeśli włączone w konfiguracji).
 
 ### 🚀 **Wymagania**
@@ -84,6 +90,8 @@ scp372plugin:
   spawn_chance: 30 # Szansa na przypisanie SCP-372 (w procentach)
   enable_cassie_on_escape: true # Włącz lub wyłącz ogłoszenia CASSIE o ucieczce
   cassie_message_on_escape: "SCP 3 7 2 has successfully escaped" # Ogłoszenie CASSIE o ucieczce SCP-372
+  enable_cassie_on_spawn: true # Włącz lub wyłącz ogłoszenia CASSIE o pojawieniu się
+  cassie_message_on_spawn: "SCP 3 7 2 has breached containment" # Ogłoszenie CASSIE o pojawieniu się SCP-372
 ```
 
 ### 🛠️ **Instalacja**
