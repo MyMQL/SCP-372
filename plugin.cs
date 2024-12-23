@@ -10,8 +10,8 @@ namespace SCP372Plugin
     {
         public override string Name => "SCP372MyMQL";
         public override string Author => "MyMQL";
-        public override Version RequiredExiledVersion => new Version(8, 14, 0);
-        public override Version Version => new Version(1, 2, 0);
+        public override Version RequiredExiledVersion => new Version(9, 0, 1);
+        public override Version Version => new Version(1, 2, 1);
 
         public static Plugin Instance { get; private set; }
         private VisibilityManager visibilityManager;
