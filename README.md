@@ -1,6 +1,6 @@
 # 🔥 **SCP-372 Plugin for SCP: Secret Laboratory** 🔥
 
-![Exiled](https://img.shields.io/badge/Exiled-8.14.0-blue.svg) ![Language](https://img.shields.io/badge/Language-C%23-brightgreen.svg) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Exiled](https://img.shields.io/badge/Exiled-9.0.1-blue.svg) ![Language](https://img.shields.io/badge/Language-C%23-brightgreen.svg) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## 🌍 **Description ENG**
 
@@ -18,7 +18,7 @@
 - 🛠️ **Debugging**: Additional console logs (when enabled in the config).
 
 ### 🚀 **Requirements**
-- **Exiled API** version `8.14.0`.
+- **Exiled API** version `9.0.1`.
 - Ability to drag and drop a file 🤩
 
 ### 🔧 **Configuration**
@@ -74,7 +74,7 @@ Found a bug or have a suggestion? Open an issue in this repository and provide d
 - 🛠️ **Debugowanie**: Dodatkowe logi w konsoli (jeśli włączone w konfiguracji).
 
 ### 🚀 **Wymagania**
-- **Exiled API** w wersji `8.14.0`.
+- **Exiled API** w wersji `9.0.1`.
 
 ### 🔧 **Konfiguracja**
 Plik `config.yml` pozwala na pełną kontrolę nad pluginem:
