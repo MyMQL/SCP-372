@@ -121,6 +121,4 @@ Projekt jest dostępny na licencji **MIT**, co oznacza, że możesz go swobodnie
 ---
 
 ## 🧩 **Zgłaszanie błędów**
-Znalazłeś błąd lub masz sugestię? Otwórz zgłoszenie w tym repozytorium i pod
-
-aj szczegółowe informacje o problemie lub swoim pomyśle. Ale BŁAGAM, bez postów typu "nie działa napraw".****
+Znalazłeś błąd lub masz sugestię? Otwórz zgłoszenie w tym repozytorium i podaj szczegółowe informacje o problemie lub swoim pomyśle. Ale BŁAGAM, bez postów typu "nie działa napraw".
