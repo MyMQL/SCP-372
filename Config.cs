@@ -34,5 +34,23 @@ namespace SCP372Plugin
 
         // Message announced by CASSIE when SCP-372 escapes
         public string CassieMessageOnEscape { get; set; } = "SCP 3 7 2 has escaped.";
+
+        // Should the cassie announce SCP-372's death?
+        public bool EnableCassieOnDeath { get; set; } = true;
+
+        // Message announced by CASSIE when SCP-372 dies
+        public string CassieMessageOnDeath { get; set; } = "SCP 3 7 2 has been neutralized.";
+
+        // Should SCP-372 be visible when using items (e.g., medkits, adrenaline)?
+        // If true, SCP-372 becomes visible when interacting with items.
+        // If false, SCP-372 remains invisible while using items.
+        public bool VisibleWhenUsingItems { get; set; } = true;
+
+        // Determines if SCP-372 becomes visible when using voice chat (Q key).
+        // If true, SCP-372 becomes visible when speaking and remains visible for the specified duration after stopping.
+        public bool VisibleWhenUsingVoiceChat { get; set; } = true;
+
+        // Duration (in seconds) for SCP-372 to remain visible after speaking.
+        public float VoiceChatVisibilityDuration { get; set; } = 4f;
     }
 }

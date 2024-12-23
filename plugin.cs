@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Exiled.API.Features;
+using Exiled.Events.EventArgs.Player;
 using MEC;
+using PlayerRoles;
+using PluginAPI.Events;
 
 namespace SCP372Plugin
 {
@@ -11,7 +14,7 @@ namespace SCP372Plugin
         public override string Name => "SCP372MyMQL";
         public override string Author => "MyMQL";
         public override Version RequiredExiledVersion => new Version(9, 0, 1);
-        public override Version Version => new Version(1, 2, 1);
+        public override Version Version => new Version(1, 3, 0);
 
         public static Plugin Instance { get; private set; }
         private VisibilityManager visibilityManager;
@@ -24,6 +27,9 @@ namespace SCP372Plugin
             Exiled.Events.Handlers.Player.Shooting += OnShooting;
             Exiled.Events.Handlers.Player.Escaping += OnEscaping; // new handler
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
+            Exiled.Events.Handlers.Player.Died += OnPlayerDied;
+            Exiled.Events.Handlers.Player.UsingItem += OnUsingItem;
+            Exiled.Events.Handlers.Player.VoiceChatting += OnVoiceChatting;
 
             // monitor if 372 should have invisibility but it doesnt, if it should then do it
             Timing.RunCoroutine(MonitorVisibilityState());
@@ -40,6 +46,9 @@ namespace SCP372Plugin
             Exiled.Events.Handlers.Player.Shooting -= OnShooting;
             Exiled.Events.Handlers.Player.Escaping -= OnEscaping; // remove handler
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
+            Exiled.Events.Handlers.Player.Died -= OnPlayerDied;
+            Exiled.Events.Handlers.Player.UsingItem -= OnUsingItem;
+            Exiled.Events.Handlers.Player.VoiceChatting -= OnVoiceChatting;
             visibilityManager = null;
             Instance = null;
 
@@ -112,7 +121,7 @@ namespace SCP372Plugin
                 Log.Info($"Player {player.Nickname} has been assigned as SCP-372.");
         }
 
-        private void OnInteractingDoor(Exiled.Events.EventArgs.Player.InteractingDoorEventArgs ev)
+        private void OnInteractingDoor(InteractingDoorEventArgs ev)
         {
             if (ev.Player == visibilityManager.Scp372Player)
             {
@@ -120,7 +129,7 @@ namespace SCP372Plugin
             }
         }
 
-        private void OnShooting(Exiled.Events.EventArgs.Player.ShootingEventArgs ev)
+        private void OnShooting(ShootingEventArgs ev)
         {
             if (ev.Player == visibilityManager.Scp372Player)
             {
@@ -128,7 +137,7 @@ namespace SCP372Plugin
             }
         }
 
-        private void OnEscaping(Exiled.Events.EventArgs.Player.EscapingEventArgs ev)
+        private void OnEscaping(EscapingEventArgs ev)
         {
             if (ev.Player == visibilityManager.Scp372Player)
             {
@@ -141,6 +150,33 @@ namespace SCP372Plugin
                 }
             }
         }
+
+        private void OnPlayerDied(DiedEventArgs ev)
+        {
+            // Sprawdź, czy zmarły gracz to SCP-372
+            if (ev.Player.SessionVariables.ContainsKey("IsSCP372") && (bool)ev.Player.SessionVariables["IsSCP372"])
+            {
+                visibilityManager.HandlePlayerDeath(ev.Player);
+            }
+        }
+
+        private void OnUsingItem(UsingItemEventArgs ev)
+        {
+            if (ev.Player == visibilityManager.Scp372Player && Config.VisibleWhenUsingItems)
+            {
+                visibilityManager.TemporarilyMakeVisible(ev.Player, Config.VisibilityDuration);
+            }
+        }
+
+        private void OnVoiceChatting(VoiceChattingEventArgs ev)
+        {
+            if (ev.Player == visibilityManager.Scp372Player && Config.VisibleWhenUsingVoiceChat)
+            {
+                // Tymczasowo pokazuje SCP-372 na czas określony w konfiguracji
+                visibilityManager.TemporarilyMakeVisible(ev.Player, Config.VoiceChatVisibilityDuration);
+            }
+        }
+
     }
 }
 

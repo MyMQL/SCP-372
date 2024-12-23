@@ -17,6 +17,7 @@ namespace SCP372Plugin
         public void AssignScp372Player(Player player)
         {
             Scp372Player = player;
+            player.SessionVariables["IsSCP372"] = true;
             EnsureInvisible(player); // make sure that the player is invisible at start, reffers to plugin,.cs
 
             SCP372Event.OnSCP372Assigned(new SCP372AssignedEventArgs(player)); // Trigger event
@@ -52,7 +53,7 @@ namespace SCP372Plugin
 
         public void EnsureInvisible(Player player)
         {
-            if (isTemporarilyVisible || isOnSurface) return; // Make him visible on surface, and invisible in every other area
+            if (isTemporarilyVisible || isOnSurface) return; // Do not make visible if he is on surface
 
             var effectsController = player.ReferenceHub.playerEffectsController;
 
@@ -102,6 +103,7 @@ namespace SCP372Plugin
             if (player == Scp372Player)
             {
                 Scp372Player = null;
+                player.SessionVariables.Remove("IsSCP372");
                 // stop invisibility
                 player.ReferenceHub.playerEffectsController.DisableEffect<Invisible>();
 
@@ -134,6 +136,29 @@ namespace SCP372Plugin
 
             if (Plugin.Instance.Config.Debug)
                 Log.Info($"SCP-372 player {player.Nickname} escaped and is no longer SCP-372.");
+        }
+
+        public void HandlePlayerDeath(Player player)
+        {
+            if (player == Scp372Player)
+            {
+                RemoveScp372Player(player);
+
+                if (Plugin.Instance.Config.EnableCassieOnDeath)
+                {
+                    string cassieMessage = Plugin.Instance.Config.CassieMessageOnDeath;
+
+                    if (!string.IsNullOrEmpty(cassieMessage))
+                    {
+                        Cassie.Message(cassieMessage);
+                        if (Plugin.Instance.Config.Debug)
+                            Log.Info($"CASSIE broadcasted: {cassieMessage}");
+                    }
+                }
+
+                if (Plugin.Instance.Config.Debug)
+                    Log.Info($"SCP-372 player {player.Nickname} has died. System deactivated.");
+            }
         }
 
         private IEnumerator<float> MonitorSurface()
