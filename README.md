@@ -4,16 +4,17 @@
 
 ## 🌍 **Description ENG**
 
-**SCP-372** is an advanced server plugin for SCP: Secret Laboratory that introduces **SCP-372** – an invisible and exceptionally fast entity. SCP-372 becomes temporarily visible after shooting, interacting with objects, or entering certain areas like the surface.
+**SCP-372** is an advanced server plugin for SCP: Secret Laboratory that introduces **SCP-372** – an invisible and exceptionally fast entity. SCP-372 becomes temporarily visible after shooting, interacting with objects, entering certain areas like the surface, using items, or speaking in voice chat.
 
 ### ✨ **Features**
 - 📌 **Invisibility**: Automatically applies the `Invisible` effect to SCP-372.
-- ⏱️ **Temporary Visibility**: SCP-372 becomes visible for a configurable amount of time after performing actions (e.g., opening doors, shooting).
+- ⏱️ **Temporary Visibility**: SCP-372 becomes visible for a configurable amount of time after performing actions (e.g., opening doors, shooting, using items, or speaking in voice chat).
 - 🌐 **Surface Detection**: SCP-372 becomes permanently visible when on the surface and invisible again when returning underground.
-- ⚙️ **Full Configuration**: Customize the starting class, health, visibility duration, and more.
+- ⚙️ **Full Configuration**: Customize the starting class, health, visibility duration, item usage visibility, voice chat visibility, and more.
 - 🪄 **Dynamic Correction**: Automatically corrects invisibility effect if removed unexpectedly.
 - 🔔 **Escape Detection**: Broadcast a configurable CASSIE announcement when SCP-372 escapes.
 - 📢 **Spawn Announcement**: Broadcast a configurable CASSIE announcement when SCP-372 spawns.
+- 🔔 **Death Announcement**: Broadcast a configurable CASSIE announcement when SCP-372 dies.
 - 🔧 **API Support**: Expose events to integrate SCP-372's behavior with other plugins or systems.
 - 🛠️ **Debugging**: Additional console logs (when enabled in the config).
 
@@ -37,6 +38,11 @@ scp372plugin:
   cassie_message_on_escape: "SCP 3 7 2 has successfully escaped" # CASSIE announcement for SCP-372 escape
   enable_cassie_on_spawn: true # Enable or disable CASSIE spawn announcements
   cassie_message_on_spawn: "SCP 3 7 2 has breached containment" # CASSIE announcement for SCP-372 spawn
+  enable_cassie_on_death: true # Enable or disable CASSIE death announcements
+  cassie_message_on_death: "SCP 3 7 2 has been neutralized" # CASSIE announcement for SCP-372 death
+  visible_when_using_items: true # Should SCP-372 become visible when using items (e.g., medkits, adrenaline)?
+  visible_when_speaking: true # Should SCP-372 become visible while speaking in voice chat (Q key)?
+  speaking_visibility_duration: 4.0 # Duration (in seconds) SCP-372 stays visible after speaking in voice chat
 ```
 
 ### 🛠️ **Installation**
@@ -60,16 +66,17 @@ Found a bug or have a suggestion? Open an issue in this repository and provide d
 
 ## 🛠️ **Opis (PL)**
 
-**SCP-372** to zaawansowany plugin na serwery SCP: Secret Laboratory, który dodaje **SCP-372** – niewidzialną i wyjątkowo szybką jednostkę. Działa TYLKO na exiledzie w wersji 8.14.0.
+**SCP-372** to zaawansowany plugin na serwery SCP: Secret Laboratory, który dodaje **SCP-372** – niewidzialną i wyjątkowo szybką jednostkę. Działa TYLKO na exiledzie w wersji 9.0.1.
 
 ### ✨ **Funkcje**
 - 📌 **Niewidzialność**: Automatyczne ustawienie efektu `Invisible` dla SCP-372.
-- ⏱️ **Tymczasowa widzialność**: SCP-372 staje się widzialny na określony czas po akcji (np. otwieranie drzwi, strzelanie).
+- ⏱️ **Tymczasowa widzialność**: SCP-372 staje się widzialny na określony czas po akcji (np. otwieranie drzwi, strzelanie, używanie przedmiotów, mówienie przez czat głosowy).
 - 🌐 **Wykrywanie powierzchni**: SCP-372 staje się widzialny na powierzchni i wraca do niewidzialności, gdy wraca pod ziemię.
-- ⚙️ **Pełna konfiguracja**: Możliwość ustawienia klasy startowej, zdrowia, czasu widzialności i więcej.
+- ⚙️ **Pełna konfiguracja**: Możliwość ustawienia klasy startowej, zdrowia, czasu widzialności, widoczności podczas używania przedmiotów i mówienia.
 - 🪄 **Dynamiczna korekcja**: System automatycznie koryguje efekt niewidzialności, jeśli zostanie usunięty.
 - 🔔 **Wykrywanie ucieczki**: Nadawanie ogłoszenia przez CASSIE o ucieczce SCP-372.
 - 📢 **Ogłoszenie pojawienia się**: Nadawanie ogłoszenia przez CASSIE o pojawieniu się SCP-372.
+- 🔔 **Ogłoszenie śmierci**: Nadawanie ogłoszenia przez CASSIE o śmierci SCP-372.
 - 🔧 **Obsługa API**: Eksponowanie zdarzeń do integracji zachowania SCP-372 z innymi pluginami.
 - 🛠️ **Debugowanie**: Dodatkowe logi w konsoli (jeśli włączone w konfiguracji).
 
@@ -92,6 +99,11 @@ scp372plugin:
   cassie_message_on_escape: "SCP 3 7 2 has successfully escaped" # Ogłoszenie CASSIE o ucieczce SCP-372
   enable_cassie_on_spawn: true # Włącz lub wyłącz ogłoszenia CASSIE o pojawieniu się
   cassie_message_on_spawn: "SCP 3 7 2 has breached containment" # Ogłoszenie CASSIE o pojawieniu się SCP-372
+  enable_cassie_on_death: true # Włącz lub wyłącz ogłoszenia CASSIE o śmierci SCP-372
+  cassie_message_on_death: "SCP 3 7 2 has been neutralized" # Ogłoszenie CASSIE o śmierci SCP-372
+  visible_when_using_items: true # Czy SCP-372 staje się widzialny podczas używania przedmiotów (np. apteczek, adrenaliny)?
+  visible_when_speaking: true # Czy SCP-372 staje się widzialny podczas mówienia w czacie głosowym (klawisz Q)?
+  speaking_visibility_duration: 4.0 # Czas widzialności (w sekundach) SCP-372 po mówieniu w czacie głosowym
 ```
 
 ### 🛠️ **Instalacja**
@@ -109,4 +121,6 @@ Projekt jest dostępny na licencji **MIT**, co oznacza, że możesz go swobodnie
 ---
 
 ## 🧩 **Zgłaszanie błędów**
-Znalazłeś błąd lub masz sugestię? Otwórz zgłoszenie w tym repozytorium i podaj szczegółowe informacje o problemie lub swoim pomyśle. Ale BŁAGAM, bez postów typu "nie działa napraw".
+Znalazłeś błąd lub masz sugestię? Otwórz zgłoszenie w tym repozytorium i pod
+
+aj szczegółowe informacje o problemie lub swoim pomyśle. Ale BŁAGAM, bez postów typu "nie działa napraw".****
