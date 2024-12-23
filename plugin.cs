@@ -153,7 +153,7 @@ namespace SCP372Plugin
 
         private void OnPlayerDied(DiedEventArgs ev)
         {
-            // Sprawdź, czy zmarły gracz to SCP-372
+            // check, if that dead player is scp-372
             if (ev.Player.SessionVariables.ContainsKey("IsSCP372") && (bool)ev.Player.SessionVariables["IsSCP372"])
             {
                 visibilityManager.HandlePlayerDeath(ev.Player);
@@ -172,7 +172,7 @@ namespace SCP372Plugin
         {
             if (ev.Player == visibilityManager.Scp372Player && Config.VisibleWhenUsingVoiceChat)
             {
-                // Tymczasowo pokazuje SCP-372 na czas określony w konfiguracji
+                // shows scp-372 while talking
                 visibilityManager.TemporarilyMakeVisible(ev.Player, Config.VoiceChatVisibilityDuration);
             }
         }
