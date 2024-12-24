@@ -144,6 +144,9 @@ namespace SCP372Plugin
             {
                 RemoveScp372Player(player);
 
+                // Trigger the SCP-372 death event
+                SCP372Event.OnSCP372Died(new SCP372DiedEventArgs(player));
+
                 if (Plugin.Instance.Config.EnableCassieOnDeath)
                 {
                     string cassieMessage = Plugin.Instance.Config.CassieMessageOnDeath;

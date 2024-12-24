@@ -4,9 +4,6 @@ using System.Linq;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using MEC;
-using PlayerRoles;
-using PluginAPI.Events;
-using Exiled.Events.EventArgs;
 
 namespace SCP372Plugin
 {
@@ -15,7 +12,7 @@ namespace SCP372Plugin
         public override string Name => "SCP372MyMQL";
         public override string Author => "MyMQL";
         public override Version RequiredExiledVersion => new Version(9, 0, 1);
-        public override Version Version => new Version(1, 4, 0);
+        public override Version Version => new Version(1, 4, 1);
 
         public static Plugin Instance { get; private set; }
         private VisibilityManager visibilityManager;
