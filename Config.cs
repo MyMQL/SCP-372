@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Interfaces;
 using PlayerRoles;
+using Exiled.API.Enums;
 
 namespace SCP372Plugin
 {
@@ -52,5 +53,11 @@ namespace SCP372Plugin
 
         // Duration (in seconds) for SCP-372 to remain visible after speaking.
         public float VoiceChatVisibilityDuration { get; set; } = 4f;
+
+        // Typ pokoju, w którym SCP-372 ma się zrespić. Przykład: "Hcz049".
+        public RoomType SpawnRoomType { get; set; } = RoomType.Hcz939;
+
+        // Minimalna liczba graczy wymagana, aby SCP-372 mógł się pojawić.
+        public int MinPlayers { get; set; } = 8;
     }
 }

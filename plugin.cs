@@ -6,6 +6,7 @@ using Exiled.Events.EventArgs.Player;
 using MEC;
 using PlayerRoles;
 using PluginAPI.Events;
+using Exiled.Events.EventArgs;
 
 namespace SCP372Plugin
 {
@@ -14,7 +15,7 @@ namespace SCP372Plugin
         public override string Name => "SCP372MyMQL";
         public override string Author => "MyMQL";
         public override Version RequiredExiledVersion => new Version(9, 0, 1);
-        public override Version Version => new Version(1, 3, 0);
+        public override Version Version => new Version(1, 4, 0);
 
         public static Plugin Instance { get; private set; }
         private VisibilityManager visibilityManager;
@@ -63,6 +64,14 @@ namespace SCP372Plugin
             if (Config.Debug)
                 Log.Info("Round started. Checking for SCP-372 assignment...");
 
+
+            if (Server.PlayerCount < Config.MinPlayers)
+            {
+                if (Config.Debug)
+                    Log.Warn($"Not enough players to spawn SCP-372. Current players: {Server.PlayerCount}, required: {Config.MinPlayers}.");
+                return; // Przerwij, jeśli liczba graczy jest za mała
+            }
+
             // random spawn chance system
             if (new Random().Next(0, 100) < Config.SpawnChance)
             {
@@ -103,6 +112,23 @@ namespace SCP372Plugin
             player.Role.Set(Config.StartingRole);
             player.Health = Config.StartingHealth;
             visibilityManager.AssignScp372Player(player);
+
+            // Znajdź pokój na podstawie typu z konfiguracji
+            var spawnRoom = Room.List.FirstOrDefault(room => room.Type == Config.SpawnRoomType);
+            if (spawnRoom != null)
+            {
+                // Dodaj korekcję wysokości
+                var adjustedPosition = spawnRoom.Position + new UnityEngine.Vector3(0, 1.5f, 0);
+                player.Position = adjustedPosition;
+
+                if (Config.Debug)
+                    Log.Info($"SCP-372 {player.Nickname} zrespiony w pokoju typu {Config.SpawnRoomType} na pozycji {adjustedPosition}.");
+            }
+            else
+            {
+                if (Config.Debug)
+                    Log.Warn($"Nie znaleziono pokoju o typie {Config.SpawnRoomType}. SCP-372 zrespiony w domyślnej pozycji.");
+            }
 
             // make sure that 372 is invisibile at the start, no need to wait x time
             visibilityManager.EnsureInvisible(player);
@@ -176,9 +202,5 @@ namespace SCP372Plugin
                 visibilityManager.TemporarilyMakeVisible(ev.Player, Config.VoiceChatVisibilityDuration);
             }
         }
-
     }
 }
-
-
-
