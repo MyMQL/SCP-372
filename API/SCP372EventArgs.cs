@@ -23,4 +23,14 @@ namespace SCP372Plugin.API
 
         public Player Player { get; }
     }
+
+    public class SCP372DiedEventArgs : IExiledEvent
+    {
+        public SCP372DiedEventArgs(Player player)
+        {
+            Player = player;
+        }
+
+        public Player Player { get; }
+    }
 }
