@@ -23,7 +23,7 @@ namespace SCP372Plugin
             visibilityManager = new VisibilityManager();
             Exiled.Events.Handlers.Player.InteractingDoor += OnInteractingDoor;
             Exiled.Events.Handlers.Player.Shooting += OnShooting;
-            Exiled.Events.Handlers.Player.Escaping += OnEscaping; // new handler
+            Exiled.Events.Handlers.Player.Escaping += OnEscaping; 
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Player.Died += OnPlayerDied;
             Exiled.Events.Handlers.Player.UsingItem += OnUsingItem;
@@ -42,7 +42,7 @@ namespace SCP372Plugin
         {
             Exiled.Events.Handlers.Player.InteractingDoor -= OnInteractingDoor;
             Exiled.Events.Handlers.Player.Shooting -= OnShooting;
-            Exiled.Events.Handlers.Player.Escaping -= OnEscaping; // remove handler
+            Exiled.Events.Handlers.Player.Escaping -= OnEscaping; 
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Player.Died -= OnPlayerDied;
             Exiled.Events.Handlers.Player.UsingItem -= OnUsingItem;
@@ -66,7 +66,7 @@ namespace SCP372Plugin
             {
                 if (Config.Debug)
                     Log.Warn($"Not enough players to spawn SCP-372. Current players: {Server.PlayerCount}, required: {Config.MinPlayers}.");
-                return; // Przerwij, jeśli liczba graczy jest za mała
+                return; // Stop, if the number of players is too low
             }
 
             // random spawn chance system
@@ -110,21 +110,21 @@ namespace SCP372Plugin
             player.Health = Config.StartingHealth;
             visibilityManager.AssignScp372Player(player);
 
-            // Znajdź pokój na podstawie typu z konfiguracji
+            // Find room
             var spawnRoom = Room.List.FirstOrDefault(room => room.Type == Config.SpawnRoomType);
             if (spawnRoom != null)
             {
-                // Dodaj korekcję wysokości
+                // Spawn player 1.5f higher to avoid issues
                 var adjustedPosition = spawnRoom.Position + new UnityEngine.Vector3(0, 1.5f, 0);
                 player.Position = adjustedPosition;
 
                 if (Config.Debug)
-                    Log.Info($"SCP-372 {player.Nickname} zrespiony w pokoju typu {Config.SpawnRoomType} na pozycji {adjustedPosition}.");
+                    Log.Info($"SCP-372 {player.Nickname} has been spawned in {Config.SpawnRoomType} on coordinates {adjustedPosition}.");
             }
             else
             {
                 if (Config.Debug)
-                    Log.Warn($"Nie znaleziono pokoju o typie {Config.SpawnRoomType}. SCP-372 zrespiony w domyślnej pozycji.");
+                    Log.Warn($"Room ID {Config.SpawnRoomType} not found. SCP-372 will respawn in default class position instead.");
             }
 
             // make sure that 372 is invisibile at the start, no need to wait x time
