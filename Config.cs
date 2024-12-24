@@ -55,11 +55,11 @@ namespace SCP372Plugin
         // Duration (in seconds) for SCP-372 to remain visible after speaking.
         public float VoiceChatVisibilityDuration { get; set; } = 4f;
 
-        // Typ pokoju, w którym SCP-372 ma się zrespić. Przykład: "Hcz049".
+        // Room type, where SCP-372 should spawn".
         [Description("W.I.P - I highly suggest leaving it as default, some rooms might be broken.")]
         public RoomType SpawnRoomType { get; set; } = RoomType.Hcz939;
 
-        // Minimalna liczba graczy wymagana, aby SCP-372 mógł się pojawić.
+        // Minimum number of players, that should be on the server for SCP-372 being able to spawn.
         public int MinPlayers { get; set; } = 1;
     }
 }
