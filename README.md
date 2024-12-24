@@ -10,7 +10,9 @@
 - 📌 **Invisibility**: Automatically applies the `Invisible` effect to SCP-372.
 - ⏱️ **Temporary Visibility**: SCP-372 becomes visible for a configurable amount of time after performing actions (e.g., opening doors, shooting, using items, or speaking in voice chat).
 - 🌐 **Surface Detection**: SCP-372 becomes permanently visible when on the surface and invisible again when returning underground.
-- ⚙️ **Full Configuration**: Customize the starting class, health, visibility duration, item usage visibility, voice chat visibility, and more.
+- ⚙️ **Full Configuration**: Customize the starting class, health, visibility duration, item usage visibility, voice chat visibility, spawn chance, and more.
+- 🛡️ **Player Count Check**: SCP-372 will only spawn if a minimum configurable number of players is on the server.
+- 📌 **Room-Specific Spawn**: Configure SCP-372 to spawn in a specific room (default: `HCZ049`). Note: For available room names, see the [RoomType documentation](https://docs.exiled-team.net/api/Exiled.API.Enums.RoomType.html). Best left at the default value, as this feature isn't fully stable yet.
 - 🪄 **Dynamic Correction**: Automatically corrects invisibility effect if removed unexpectedly.
 - 🔔 **Escape Detection**: Broadcast a configurable CASSIE announcement when SCP-372 escapes.
 - 📢 **Spawn Announcement**: Broadcast a configurable CASSIE announcement when SCP-372 spawns.
@@ -43,6 +45,8 @@ scp372plugin:
   visible_when_using_items: true # Should SCP-372 become visible when using items (e.g., medkits, adrenaline)?
   visible_when_speaking: true # Should SCP-372 become visible while speaking in voice chat (Q key)?
   speaking_visibility_duration: 4.0 # Duration (in seconds) SCP-372 stays visible after speaking in voice chat
+  min_players: 8 # Minimum number of players required for SCP-372 to spawn
+  spawn_room_type: HCZ049 # RoomType ID for SCP-372 spawn location (e.g., "HCZ049"). For options, see https://docs.exiled-team.net/api/Exiled.API.Enums.RoomType.html
 ```
 
 ### 🛠️ **Installation**
@@ -73,6 +77,8 @@ Found a bug or have a suggestion? Open an issue in this repository and provide d
 - ⏱️ **Tymczasowa widzialność**: SCP-372 staje się widzialny na określony czas po akcji (np. otwieranie drzwi, strzelanie, używanie przedmiotów, mówienie przez czat głosowy).
 - 🌐 **Wykrywanie powierzchni**: SCP-372 staje się widzialny na powierzchni i wraca do niewidzialności, gdy wraca pod ziemię.
 - ⚙️ **Pełna konfiguracja**: Możliwość ustawienia klasy startowej, zdrowia, czasu widzialności, widoczności podczas używania przedmiotów i mówienia.
+- 🛡️ **Minimalna liczba graczy**: SCP-372 pojawia się tylko, jeśli liczba graczy na serwerze spełnia minimalne wymaganie.
+- 📌 **Respawn w określonym pokoju**: Konfiguracja pokoju, w którym SCP-372 się pojawi (domyślnie: `HCZ049`). Dla dostępnych nazw pokoi, zobacz [RoomType documentation](https://docs.exiled-team.net/api/Exiled.API.Enums.RoomType.html). Funkcja może być niestabilna, najlepiej zostawić domyślną wartość.
 - 🪄 **Dynamiczna korekcja**: System automatycznie koryguje efekt niewidzialności, jeśli zostanie usunięty.
 - 🔔 **Wykrywanie ucieczki**: Nadawanie ogłoszenia przez CASSIE o ucieczce SCP-372.
 - 📢 **Ogłoszenie pojawienia się**: Nadawanie ogłoszenia przez CASSIE o pojawieniu się SCP-372.
@@ -104,6 +110,8 @@ scp372plugin:
   visible_when_using_items: true # Czy SCP-372 staje się widzialny podczas używania przedmiotów (np. apteczek, adrenaliny)?
   visible_when_speaking: true # Czy SCP-372 staje się widzialny podczas mówienia w czacie głosowym (klawisz Q)?
   speaking_visibility_duration: 4.0 # Czas widzialności (w sekundach) SCP-372 po mówieniu w czacie głosowym
+  min_players: 8 # Minimalna liczba graczy wymagana do przypisania SCP-372
+  spawn_room_type: HCZ049 # Typ pokoju, w którym SCP-372 ma się zrespić (np. "HCZ049"). Lista dostępnych pokoi: https://docs.exiled-team.net/api/Exiled.API.Enums.RoomType.html
 ```
 
 ### 🛠️ **Instalacja**
