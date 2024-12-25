@@ -1,6 +1,6 @@
 # 🔥 **SCP-372 Plugin for SCP: Secret Laboratory** 🔥
 
-![Downloads](https://img.shields.io/github/downloads/MyMQL/SCP-372/total?label=Downloads&style=flat-square) ![Exiled](https://img.shields.io/badge/Exiled-9.0.1-blue.svg) ![Language](https://img.shields.io/badge/Language-C%23-brightgreen.svg) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Downloads](https://img.shields.io/github/downloads/MyMQL/SCP-372/total?label=Downloads&style=flat) ![Exiled](https://img.shields.io/badge/Exiled-9.0.1-blue.svg) ![Language](https://img.shields.io/badge/Language-C%23-brightgreen.svg) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## 🌍 **Description ENG**
 
