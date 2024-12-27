@@ -21,7 +21,7 @@
 - 🛠️ **Debugging**: Additional console logs (when enabled in the config).
 
 ### 🚀 **Requirements**
-- **Exiled API** version `9.0.1`.
+- **Exiled API** version `9.0.1` or higher.
 - Ability to drag and drop a file 🤩
 
 ### 🔧 **Configuration**
@@ -87,7 +87,7 @@ Found a bug or have a suggestion? Open an issue in this repository and provide d
 - 🛠️ **Debugowanie**: Dodatkowe logi w konsoli (jeśli włączone w konfiguracji).
 
 ### 🚀 **Wymagania**
-- **Exiled API** w wersji `9.0.1`.
+- **Exiled API** w wersji `9.0.1` lub wyższej.
 
 ### 🔧 **Konfiguracja**
 Plik `config.yml` pozwala na pełną kontrolę nad pluginem:
