@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
+using System.Linq;
 
 namespace SCP372Plugin
 {
@@ -12,7 +13,52 @@ namespace SCP372Plugin
             this.visibilityManager = visibilityManager;
         }
 
+        public void OnRoundStarted()
+        {
+            if (Plugin.Instance.Config.Debug)
+                Log.Info("Round started. Checking for SCP-372 assignment...");
+
+            if (Player.List.Count() < Plugin.Instance.Config.MinPlayers)
+            {
+                if (Plugin.Instance.Config.Debug)
+                    Log.Warn("Not enough players for SCP-372 to spawn.");
+                return;
+            }
+
+            if (new System.Random().Next(0, 100) < Plugin.Instance.Config.SpawnChance)
+            {
+                var potentialPlayers = Player.List.Where(p => p.Role.Team == PlayerRoles.Team.ClassD).ToList();
+                if (!potentialPlayers.Any())
+                {
+                    if (Plugin.Instance.Config.Debug)
+                        Log.Warn("No suitable players for SCP-372 assignment.");
+                    return;
+                }
+
+                var randomPlayer = potentialPlayers.ElementAt(new System.Random().Next(potentialPlayers.Count));
+                Plugin.Instance.AssignScp372(randomPlayer);
+
+                if (Plugin.Instance.Config.EnableCassieOnSpawn)
+                    Cassie.Message(Plugin.Instance.Config.CassieMessageOnSpawn);
+
+                if (Plugin.Instance.Config.Debug)
+                    Log.Info($"Randomly assigned {randomPlayer.Nickname} as SCP-372.");
+            }
+            else if (Plugin.Instance.Config.Debug)
+            {
+                Log.Info("No SCP-372 spawned this round due to chance.");
+            }
+        }
+
         public void OnInteractingDoor(InteractingDoorEventArgs ev)
+        {
+            if (ev.Player == visibilityManager.Scp372Player)
+            {
+                visibilityManager.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
+            }
+        }
+
+        public void OnInteractingElevator(InteractingElevatorEventArgs ev)
         {
             if (ev.Player == visibilityManager.Scp372Player)
             {

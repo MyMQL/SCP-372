@@ -2,7 +2,6 @@
 using System.Linq;
 using Exiled.API.Features;
 using MEC;
-using PlayerRoles;
 using System.Collections.Generic;
 
 namespace SCP372Plugin
@@ -11,8 +10,8 @@ namespace SCP372Plugin
     {
         public override string Name => "SCP372MyMQL";
         public override string Author => "MyMQL";
-        public override Version Version => new Version(1, 4, 2);
-        public override Version RequiredExiledVersion => new Version(9, 0, 1);
+        public override Version Version => new Version(1, 5, 0);
+        public override Version RequiredExiledVersion => new Version(9, 1, 1);
 
         public static Plugin Instance { get; private set; }
         private VisibilityManager visibilityManager;
@@ -30,7 +29,8 @@ namespace SCP372Plugin
             Exiled.Events.Handlers.Player.Died += eventHandlers.OnPlayerDied;
             Exiled.Events.Handlers.Player.UsingItem += eventHandlers.OnUsingItem;
             Exiled.Events.Handlers.Player.VoiceChatting += eventHandlers.OnVoiceChatting;
-            Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
+            Exiled.Events.Handlers.Server.RoundStarted += eventHandlers.OnRoundStarted;
+            Exiled.Events.Handlers.Player.InteractingElevator += eventHandlers.OnInteractingElevator;
 
             Timing.RunCoroutine(MonitorVisibilityState());
 
@@ -48,7 +48,8 @@ namespace SCP372Plugin
             Exiled.Events.Handlers.Player.Died -= eventHandlers.OnPlayerDied;
             Exiled.Events.Handlers.Player.UsingItem -= eventHandlers.OnUsingItem;
             Exiled.Events.Handlers.Player.VoiceChatting -= eventHandlers.OnVoiceChatting;
-            Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
+            Exiled.Events.Handlers.Server.RoundStarted -= eventHandlers.OnRoundStarted;
+            Exiled.Events.Handlers.Player.InteractingElevator -= eventHandlers.OnInteractingElevator;
 
             visibilityManager = null;
             eventHandlers = null;
@@ -66,43 +67,6 @@ namespace SCP372Plugin
             {
                 yield return Timing.WaitForSeconds(1f);
                 visibilityManager.MonitorState();
-            }
-        }
-
-        private void OnRoundStarted()
-        {
-            if (Config.Debug)
-                Log.Info("Round started. Checking for SCP-372 assignment...");
-
-            if (Player.List.Count() < Config.MinPlayers)
-            {
-                if (Config.Debug)
-                    Log.Warn("Not enough players for SCP-372 to spawn.");
-                return;
-            }
-
-            if (new Random().Next(0, 100) < Config.SpawnChance)
-            {
-                var potentialPlayers = Player.List.Where(p => p.Role.Team == Team.ClassD).ToList();
-                if (!potentialPlayers.Any())
-                {
-                    if (Config.Debug)
-                        Log.Warn("No suitable players for SCP-372 assignment.");
-                    return;
-                }
-
-                var randomPlayer = potentialPlayers.ElementAt(new Random().Next(potentialPlayers.Count));
-                AssignScp372(randomPlayer);
-
-                if (Config.EnableCassieOnSpawn)
-                    Cassie.Message(Config.CassieMessageOnSpawn);
-
-                if (Config.Debug)
-                    Log.Info($"Randomly assigned {randomPlayer.Nickname} as SCP-372.");
-            }
-            else if (Config.Debug)
-            {
-                Log.Info("No SCP-372 spawned this round due to chance.");
             }
         }
 

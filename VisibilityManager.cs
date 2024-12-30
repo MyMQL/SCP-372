@@ -89,12 +89,6 @@ namespace SCP372Plugin
                         Log.Warn($"Correction: Player {Scp372Player.Nickname} did not have the Invisible effect, reapplying.");
                     EnsureInvisible(Scp372Player);
                 }
-
-                // if the player escapes, run handleplayerescape
-                if (Scp372Player.Role.Team == Team.ChaosInsurgency || Scp372Player.Role.Team == Team.FoundationForces)
-                {
-                    HandlePlayerEscape(Scp372Player);
-                }
             }
         }
 
