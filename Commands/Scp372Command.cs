@@ -39,12 +39,9 @@ namespace SCP372Plugin
                 return false;
             }
 
-            Plugin.Instance.AssignScp372(player);
+            SCP372Manager.Instance.AssignScp372(player);
             response = $"Player {player.Nickname} has been assigned as SCP-372.";
             return true;
         }
     }
 }
-
-
-
