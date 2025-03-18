@@ -7,20 +7,14 @@ using System.Linq;
 
 namespace SCP372Plugin
 {
-    public class SCP372Manager
+    public static class SCP372Manager
     {
-        public static SCP372Manager Instance { get; private set; }
-        public Player Scp372Player { get; private set; }
-        private CoroutineHandle _visibilityCoroutine;
-        private bool _isTemporarilyVisible = false;
-        private bool _isOnSurface = false;
+        public static Player Scp372Player { get; private set; }
+        private static CoroutineHandle _visibilityCoroutine;
+        private static bool _isTemporarilyVisible = false;
+        private static bool _isOnSurface = false;
 
-        public SCP372Manager()
-        {
-            Instance = this;
-        }
-
-        public void AssignScp372Player(Player player)
+        public static void AssignScp372Player(Player player)
         {
             Scp372Player = player;
             player.SessionVariables["IsSCP372"] = true;
@@ -32,7 +26,7 @@ namespace SCP372Plugin
             Timing.RunCoroutine(MonitorSurface());
         }
 
-        public void TemporarilyMakeVisible(Player player, float duration)
+        public static void TemporarilyMakeVisible(Player player, float duration)
         {
             if (_isTemporarilyVisible)
             {
@@ -45,7 +39,7 @@ namespace SCP372Plugin
             _visibilityCoroutine = Timing.RunCoroutine(ResetVisibility(player, duration));
         }
 
-        private IEnumerator<float> ResetVisibility(Player player, float duration)
+        private static IEnumerator<float> ResetVisibility(Player player, float duration)
         {
             yield return Timing.WaitForSeconds(duration);
 
@@ -57,37 +51,31 @@ namespace SCP372Plugin
             _isTemporarilyVisible = false;
         }
 
-        public void EnsureInvisible(Player player)
+        public static void EnsureInvisible(Player player)
         {
             if (_isTemporarilyVisible || _isOnSurface) return; // Make visible if he is on surface
 
-            PlayerEffectsController effectsController = player.ReferenceHub.playerEffectsController;
-
-            if (!effectsController.GetEffect<Invisible>().IsEnabled)
+            if (!player.GetEffect<Invisible>().IsEnabled)
             {
-                effectsController.EnableEffect<Invisible>(float.MaxValue); 
+                player.EnableEffect<Invisible>(float.MaxValue);
                 Log.Debug($"Player {player.Nickname} is now invisible.");
             }
         }
 
-        public void EnsureVisible(Player player)
+        public static void EnsureVisible(Player player)
         {
-            PlayerEffectsController effectsController = player.ReferenceHub.playerEffectsController;
-
-            if (effectsController.GetEffect<Invisible>().IsEnabled)
+            if (player.GetEffect<Invisible>().IsEnabled)
             {
-                effectsController.DisableEffect<Invisible>();
+                player.DisableEffect<Invisible>();
                 Log.Debug($"Player {player.Nickname} is now visible.");
             }
         }
 
-        public void MonitorState()
+        public static void MonitorState()
         {
             if (Scp372Player != null && !_isTemporarilyVisible)
             {
-                PlayerEffectsController effectsController = Scp372Player.ReferenceHub.playerEffectsController;
-
-                if (!effectsController.GetEffect<Invisible>().IsEnabled && !_isOnSurface)
+                if (!Scp372Player.GetEffect<Invisible>().IsEnabled && !_isOnSurface)
                 {
                     Log.Debug($"Correction: Player {Scp372Player.Nickname} did not have the Invisible effect, reapplying.");
                     EnsureInvisible(Scp372Player);
@@ -95,25 +83,25 @@ namespace SCP372Plugin
             }
         }
 
-        public void RemoveScp372Player(Player player)
+        public static void RemoveScp372Player(Player player)
         {
             if (player == Scp372Player)
             {
                 Scp372Player = null;
                 player.SessionVariables.Remove("IsSCP372");
                 // stop invisibility
-                player.ReferenceHub.playerEffectsController.DisableEffect<Invisible>();
+                player.DisableEffect<Invisible>();
                 Log.Debug($"Player {player.Nickname} is no longer SCP-372. System deactivated.");
             }
         }
 
-        public void HandlePlayerEscape(Player player)
+        public static void HandlePlayerEscape(Player player)
         {
             RemoveScp372Player(player);
 
             if (Plugin.Instance.Config.EnableCassieOnEscape)
             {
-                string cassieMessage = Plugin.Instance.Config.CassieMessageOnEscape;
+                string cassieMessage = Plugin.Instance.Translation.CassieMessageOnEscape;
 
                 if (!string.IsNullOrEmpty(cassieMessage))
                 {
@@ -130,7 +118,7 @@ namespace SCP372Plugin
             Log.Debug($"SCP-372 player {player.Nickname} escaped and is no longer SCP-372.");
         }
 
-        public void HandlePlayerDeath(Player player)
+        public static void HandlePlayerDeath(Player player)
         {
             if (player == Scp372Player)
             {
@@ -141,7 +129,7 @@ namespace SCP372Plugin
 
                 if (Plugin.Instance.Config.EnableCassieOnDeath)
                 {
-                    string cassieMessage = Plugin.Instance.Config.CassieMessageOnDeath;
+                    string cassieMessage = Plugin.Instance.Translation.CassieMessageOnDeath;
 
                     if (!string.IsNullOrEmpty(cassieMessage))
                     {
@@ -153,7 +141,7 @@ namespace SCP372Plugin
             }
         }
 
-        private IEnumerator<float> MonitorSurface()
+        private static IEnumerator<float> MonitorSurface()
         {
             while (Scp372Player != null && Scp372Player.IsAlive)
             {
@@ -181,7 +169,7 @@ namespace SCP372Plugin
             }
         }
 
-        public IEnumerator<float> MonitorVisibilityState()
+        public static IEnumerator<float> MonitorVisibilityState()
         {
             while (true)
             {
@@ -190,7 +178,7 @@ namespace SCP372Plugin
             }
         }
 
-        public void AssignScp372(Player player)
+        public static void AssignScp372(Player player)
         {
             player.Role.Set(Plugin.Instance.Config.StartingRole);
             player.Health = Plugin.Instance.Config.StartingHealth;
@@ -212,7 +200,7 @@ namespace SCP372Plugin
                 Log.Debug($"Room of type {Plugin.Instance.Config.SpawnRoomType} not found. Assigning SCP-372 to default spawn position.");
             }
 
-            player.Broadcast(7, Plugin.Instance.Config.BroadcastMessage);
+            player.Broadcast(7, Plugin.Instance.Config.BroadcastMessage, default, true);
             Log.Debug($"Player {player.Nickname} has been assigned as SCP-372.");
         }
     }
