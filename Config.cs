@@ -28,20 +28,11 @@ namespace SCP372Plugin
         [Description("Should the cassie announce that 372 spawned?")]
         public bool EnableCassieOnSpawn { get; set; } = true;
 
-        [Description("Message announced by CASSIE when SCP-372 spawns.")]
-        public string CassieMessageOnSpawn { get; set; } = "SCP 3 7 2 has breached containment. Exercise caution.";
-
         [Description("Should the cassie announce SCP-372 escaping?")]
         public bool EnableCassieOnEscape { get; set; } = true;
 
-        [Description("Message announced by CASSIE when SCP-372 escapes.")]
-        public string CassieMessageOnEscape { get; set; } = "SCP 3 7 2 has escaped.";
-
         [Description("Should the cassie announce SCP-372's death?")]
         public bool EnableCassieOnDeath { get; set; } = true;
-
-        [Description("Message announced by CASSIE when SCP-372 dies.")]
-        public string CassieMessageOnDeath { get; set; } = "SCP 3 7 2 has been neutralized.";
 
         [Description("Should SCP-372 be visible when using items (e.g., medkits, adrenaline)? If true, SCP-372 becomes visible when interacting with items.")]
         public bool VisibleWhenUsingItems { get; set; } = true;

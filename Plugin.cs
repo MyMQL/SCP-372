@@ -4,21 +4,19 @@ using MEC;
 
 namespace SCP372Plugin
 {
-    public class Plugin : Plugin<Config>
+    public class Plugin : Plugin<Config, Translation>
     {
         public override string Name => "SCP372";
         public override string Author => "MyMQL";
-        public override Version Version { get; } = new Version(1, 6, 1);
+        public override Version Version { get; } = new Version(1, 6, 2);
         public override Version RequiredExiledVersion { get; } = new Version(9, 5, 1);
 
         public static Plugin Instance { get; private set; }
-        private SCP372Manager manager;
         private EventHandlers eventHandlers;
 
         public override void OnEnabled()
         {
             Instance = this;
-            manager = new SCP372Manager();
             eventHandlers = new EventHandlers();
 
             Exiled.Events.Handlers.Player.InteractingDoor += eventHandlers.OnInteractingDoor;
@@ -31,7 +29,7 @@ namespace SCP372Plugin
             Exiled.Events.Handlers.Player.InteractingElevator += eventHandlers.OnInteractingElevator;
 
 
-            Timing.RunCoroutine(manager.MonitorVisibilityState());
+            Timing.RunCoroutine(SCP372Manager.MonitorVisibilityState());
 
             base.OnEnabled();
         }
@@ -47,7 +45,6 @@ namespace SCP372Plugin
             Exiled.Events.Handlers.Server.RoundStarted -= eventHandlers.OnRoundStarted;
             Exiled.Events.Handlers.Player.InteractingElevator -= eventHandlers.OnInteractingElevator;
 
-            manager = null;
             eventHandlers = null;
             Instance = null;
 
