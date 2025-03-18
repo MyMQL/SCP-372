@@ -29,11 +29,11 @@ namespace SCP372Plugin
                 }
 
                 Player randomPlayer = potentialPlayers.GetRandomValue();
-                SCP372Manager.Instance.AssignScp372(randomPlayer);
+                SCP372Manager.AssignScp372(randomPlayer);
 
                 if (Plugin.Instance.Config.EnableCassieOnSpawn)
                 {
-                    Cassie.Message(Plugin.Instance.Config.CassieMessageOnSpawn);
+                    Cassie.Message(Plugin.Instance.Translation.CassieMessageOnSpawn);
                     Log.Debug($"Randomly assigned {randomPlayer.Nickname} as SCP-372.");
                 }
             }
@@ -45,33 +45,33 @@ namespace SCP372Plugin
 
         public void OnInteractingDoor(InteractingDoorEventArgs ev)
         {
-            if (ev.Player == SCP372Manager.Instance.Scp372Player)
+            if (ev.Player == SCP372Manager.Scp372Player)
             {
-                SCP372Manager.Instance.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
+                SCP372Manager.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
             }
         }
 
         public void OnInteractingElevator(InteractingElevatorEventArgs ev)
         {
-            if (ev.Player == SCP372Manager.Instance.Scp372Player)
+            if (ev.Player == SCP372Manager.Scp372Player)
             {
-                SCP372Manager.Instance.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
+                SCP372Manager.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
             }
         }
 
         public void OnShooting(ShootingEventArgs ev)
         {
-            if (ev.Player == SCP372Manager.Instance.Scp372Player)
+            if (ev.Player == SCP372Manager.Scp372Player)
             {
-                SCP372Manager.Instance.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
+                SCP372Manager.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
             }
         }
 
         public void OnEscaping(EscapingEventArgs ev)
         {
-            if (ev.Player == SCP372Manager.Instance.Scp372Player)
+            if (ev.Player == SCP372Manager.Scp372Player)
             {
-                SCP372Manager.Instance.HandlePlayerEscape(ev.Player);
+                SCP372Manager.HandlePlayerEscape(ev.Player);
                 Log.Debug($"Player {ev.Player.Nickname} escaped as SCP-372. System disabled.");
             }
         }
@@ -80,23 +80,23 @@ namespace SCP372Plugin
         {
             if (ev.Player.SessionVariables.ContainsKey("IsSCP372") && (bool)ev.Player.SessionVariables["IsSCP372"])
             {
-                SCP372Manager.Instance.HandlePlayerDeath(ev.Player);
+                SCP372Manager.HandlePlayerDeath(ev.Player);
             }
         }
 
         public void OnUsingItem(UsingItemEventArgs ev)
         {
-            if (ev.Player == SCP372Manager.Instance.Scp372Player && Plugin.Instance.Config.VisibleWhenUsingItems)
+            if (ev.Player == SCP372Manager.Scp372Player && Plugin.Instance.Config.VisibleWhenUsingItems)
             {
-                SCP372Manager.Instance.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
+                SCP372Manager.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VisibilityDuration);
             }
         }
 
         public void OnVoiceChatting(VoiceChattingEventArgs ev)
         {
-            if (ev.Player == SCP372Manager.Instance.Scp372Player && Plugin.Instance.Config.VisibleWhenUsingVoiceChat)
+            if (ev.Player == SCP372Manager.Scp372Player && Plugin.Instance.Config.VisibleWhenUsingVoiceChat)
             {
-                SCP372Manager.Instance.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VoiceChatVisibilityDuration);
+                SCP372Manager.TemporarilyMakeVisible(ev.Player, Plugin.Instance.Config.VoiceChatVisibilityDuration);
             }
         }
     }
